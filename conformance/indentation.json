@@ -1,0 +1,74 @@
+{
+  "lines": [
+    "item:1",
+    "item:2",
+    "item:3",
+    "item:4",
+    "text:3"
+  ],
+  "scopes": [
+    {
+      "kind": "file",
+      "extent": [
+        1,
+        5
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 1,
+      "parent": 0,
+      "extent": [
+        1,
+        5
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 1,
+      "marker": "-",
+      "line": 2,
+      "parent": 1,
+      "extent": [
+        2,
+        2
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 1,
+      "marker": "-",
+      "line": 3,
+      "parent": 1,
+      "extent": [
+        3,
+        5
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 2,
+      "marker": "-",
+      "line": 4,
+      "parent": 3,
+      "extent": [
+        4,
+        4
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "code": "S001",
+      "line": 2,
+      "text": "\t"
+    },
+    {
+      "code": "S001",
+      "line": 5,
+      "text": "\t"
+    }
+  ]
+}

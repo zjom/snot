@@ -1,0 +1,71 @@
+{
+  "lines": [
+    "row:1",
+    "separator:0",
+    "row:2",
+    "row:3"
+  ],
+  "scopes": [
+    {
+      "kind": "file",
+      "extent": [
+        1,
+        4
+      ]
+    },
+    {
+      "kind": "row",
+      "table": 0,
+      "cells": [
+        "Milestone",
+        "Due",
+        "Owner"
+      ],
+      "line": 1,
+      "parent": 0,
+      "extent": [
+        1,
+        1
+      ]
+    },
+    {
+      "kind": "row",
+      "table": 0,
+      "cells": [
+        "Beta",
+        "2026-10-31",
+        "bob"
+      ],
+      "line": 3,
+      "parent": 0,
+      "extent": [
+        3,
+        3
+      ]
+    },
+    {
+      "kind": "row",
+      "table": 0,
+      "cells": [
+        "Retro",
+        "2026-11-07",
+        "priya"
+      ],
+      "line": 4,
+      "parent": 0,
+      "extent": [
+        4,
+        4
+      ]
+    }
+  ],
+  "tables": [
+    {
+      "lines": [
+        1,
+        4
+      ],
+      "header": 1
+    }
+  ]
+}

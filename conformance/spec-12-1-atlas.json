@@ -1,0 +1,390 @@
+{
+  "lines": [
+    "text:0",
+    "blank",
+    "heading:1",
+    "blank",
+    "text:1",
+    "text:1",
+    "blank",
+    "heading:2",
+    "item:3",
+    "item:4",
+    "item:5",
+    "blank",
+    "heading:6",
+    "text:6",
+    "blank",
+    "fence:6",
+    "verbatim:6",
+    "fence:6",
+    "blank",
+    "fence:6",
+    "verbatim:6",
+    "fence:6",
+    "blank",
+    "heading:7",
+    "row:8",
+    "separator:7",
+    "row:9",
+    "row:10",
+    "blank",
+    "heading:11",
+    "item:12",
+    "item:13",
+    "item:14",
+    "item:15",
+    "item:16"
+  ],
+  "scopes": [
+    {
+      "kind": "file",
+      "extent": [
+        1,
+        35
+      ],
+      "metadata": {
+        "area": [
+          "work"
+        ],
+        "created": [
+          "2026-09-26"
+        ]
+      }
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "atlas-kickoff",
+      "line": 3,
+      "parent": 0,
+      "extent": [
+        3,
+        35
+      ],
+      "metadata": {
+        "project": [
+          "atlas"
+        ],
+        "person": [
+          "bob",
+          "priya"
+        ]
+      }
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "slug": "decisions",
+      "line": 8,
+      "parent": 1,
+      "extent": [
+        8,
+        12
+      ],
+      "metadata": {
+        "id": [
+          "decisions"
+        ]
+      },
+      "id": "decisions"
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "+",
+      "number": 1,
+      "line": 9,
+      "parent": 2,
+      "extent": [
+        9,
+        9
+      ],
+      "metadata": {
+        "due": [
+          "2026-10-31"
+        ]
+      }
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "+",
+      "number": 2,
+      "line": 10,
+      "parent": 2,
+      "extent": [
+        10,
+        10
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "+",
+      "number": 3,
+      "line": 11,
+      "parent": 2,
+      "extent": [
+        11,
+        11
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "slug": "estimate",
+      "line": 13,
+      "parent": 1,
+      "extent": [
+        13,
+        23
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "slug": "milestones",
+      "line": 24,
+      "parent": 1,
+      "extent": [
+        24,
+        29
+      ]
+    },
+    {
+      "kind": "row",
+      "table": 0,
+      "cells": [
+        "Milestone",
+        "Due",
+        "Owner"
+      ],
+      "line": 25,
+      "parent": 7,
+      "extent": [
+        25,
+        25
+      ]
+    },
+    {
+      "kind": "row",
+      "table": 0,
+      "cells": [
+        "Beta",
+        "2026-10-31",
+        "@owner:bob @id:beta"
+      ],
+      "line": 27,
+      "parent": 7,
+      "extent": [
+        27,
+        27
+      ],
+      "metadata": {
+        "owner": [
+          "bob"
+        ],
+        "id": [
+          "beta"
+        ]
+      },
+      "id": "beta"
+    },
+    {
+      "kind": "row",
+      "table": 0,
+      "cells": [
+        "Retro",
+        "2026-11-07",
+        "@owner:[priya, sam]"
+      ],
+      "line": 28,
+      "parent": 7,
+      "extent": [
+        28,
+        28
+      ],
+      "metadata": {
+        "owner": [
+          "priya",
+          "sam"
+        ]
+      }
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "slug": "follow-ups",
+      "line": 30,
+      "parent": 1,
+      "extent": [
+        30,
+        35
+      ],
+      "metadata": {
+        "status": [
+          "open"
+        ]
+      }
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "task": "open",
+      "line": 31,
+      "parent": 11,
+      "extent": [
+        31,
+        31
+      ],
+      "metadata": {
+        "due": [
+          "2026-09-30"
+        ],
+        "person": [
+          "bob"
+        ],
+        "id": [
+          "send-plan"
+        ]
+      },
+      "id": "send-plan"
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "task": "open",
+      "line": 32,
+      "parent": 11,
+      "extent": [
+        32,
+        34
+      ],
+      "metadata": {
+        "urgent": [
+          "true"
+        ],
+        "person": [
+          "priya",
+          "sam"
+        ]
+      }
+    },
+    {
+      "kind": "item",
+      "depth": 1,
+      "marker": "1.",
+      "number": 1,
+      "task": "done",
+      "line": 33,
+      "parent": 13,
+      "extent": [
+        33,
+        33
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 1,
+      "marker": "2.",
+      "number": 2,
+      "task": "open",
+      "line": 34,
+      "parent": 13,
+      "extent": [
+        34,
+        34
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "task": "cancelled",
+      "line": 35,
+      "parent": 11,
+      "extent": [
+        35,
+        35
+      ]
+    }
+  ],
+  "links": [
+    {
+      "line": 5,
+      "text": "[[projects/atlas-plan#risks|risk list]]",
+      "kind": "note",
+      "path": "projects/atlas-plan",
+      "anchor": "risks",
+      "label": "risk list",
+      "scope": 1
+    },
+    {
+      "line": 6,
+      "text": "[[https://example.com/brief|client brief]]",
+      "kind": "url",
+      "url": "https://example.com/brief",
+      "label": "client brief",
+      "scope": 1
+    },
+    {
+      "line": 6,
+      "text": "[[img/atlas-wb.png]]",
+      "kind": "file",
+      "path": "img/atlas-wb.png",
+      "scope": 1
+    }
+  ],
+  "inlines": [
+    {
+      "line": 5,
+      "kind": "bold",
+      "content": "new"
+    },
+    {
+      "line": 10,
+      "kind": "underline",
+      "content": "legacy"
+    },
+    {
+      "line": 11,
+      "kind": "code",
+      "content": "MAX_ROWS"
+    },
+    {
+      "line": 14,
+      "kind": "math",
+      "content": "r = n / t"
+    },
+    {
+      "line": 14,
+      "kind": "code",
+      "content": "n"
+    }
+  ],
+  "blocks": [
+    {
+      "kind": "math",
+      "open": 16,
+      "close": 18
+    },
+    {
+      "kind": "code",
+      "language": "sh",
+      "open": 20,
+      "close": 22
+    }
+  ],
+  "tables": [
+    {
+      "lines": [
+        25,
+        28
+      ],
+      "header": 25
+    }
+  ]
+}

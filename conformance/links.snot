@@ -1,0 +1,28 @@
+# Kinds
+[[https://example.com/a#b|url]]
+[[#decisions]]
+[[projects/atlas]]
+[[projects/atlas#risks|the risks]]
+[[img/a.png]]
+[[notes/v1.2]] is a file: its last segment has a dot
+[[.hidden]] is a note: the dot is first
+
+# Problems
+[[/abs]]
+[[a/../b]]
+[[a//b]]
+[[a/]]
+[[#]]
+[[a#]]
+[[img/a.png#x]]
+
+# Syntax
+[[ spaced target | spaced label ]]
+[[a|b|c]] keeps the second bar in the label
+[[a\|b|label]] has an escaped bar in the target
+[[a\]]b]] has an escaped bracket
+[[]] and [[ ]] and [[|x]] are text
+[[unclosed is text
+[[a]] [[b]] are two links
+`[[in code]]` is not a link
+[[x `y`]] holds no code

@@ -1,0 +1,275 @@
+{
+  "lines": [
+    "heading:1",
+    "text:1",
+    "text:1",
+    "text:1",
+    "text:1",
+    "text:1",
+    "text:1",
+    "text:1",
+    "blank",
+    "heading:2",
+    "text:2",
+    "text:2",
+    "text:2",
+    "text:2",
+    "text:2",
+    "text:2",
+    "text:2",
+    "blank",
+    "heading:3",
+    "text:3",
+    "text:3",
+    "text:3",
+    "text:3",
+    "text:3",
+    "text:3",
+    "text:3",
+    "text:3",
+    "text:3"
+  ],
+  "scopes": [
+    {
+      "kind": "file",
+      "extent": [
+        1,
+        28
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "kinds",
+      "line": 1,
+      "parent": 0,
+      "extent": [
+        1,
+        9
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "problems",
+      "line": 10,
+      "parent": 0,
+      "extent": [
+        10,
+        18
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "syntax",
+      "line": 19,
+      "parent": 0,
+      "extent": [
+        19,
+        28
+      ]
+    }
+  ],
+  "links": [
+    {
+      "line": 2,
+      "text": "[[https://example.com/a#b|url]]",
+      "kind": "url",
+      "url": "https://example.com/a#b",
+      "label": "url",
+      "scope": 1
+    },
+    {
+      "line": 3,
+      "text": "[[#decisions]]",
+      "kind": "anchor",
+      "anchor": "decisions",
+      "scope": 1
+    },
+    {
+      "line": 4,
+      "text": "[[projects/atlas]]",
+      "kind": "note",
+      "path": "projects/atlas",
+      "scope": 1
+    },
+    {
+      "line": 5,
+      "text": "[[projects/atlas#risks|the risks]]",
+      "kind": "note",
+      "path": "projects/atlas",
+      "anchor": "risks",
+      "label": "the risks",
+      "scope": 1
+    },
+    {
+      "line": 6,
+      "text": "[[img/a.png]]",
+      "kind": "file",
+      "path": "img/a.png",
+      "scope": 1
+    },
+    {
+      "line": 7,
+      "text": "[[notes/v1.2]]",
+      "kind": "file",
+      "path": "notes/v1.2",
+      "scope": 1
+    },
+    {
+      "line": 8,
+      "text": "[[.hidden]]",
+      "kind": "note",
+      "path": ".hidden",
+      "scope": 1
+    },
+    {
+      "line": 11,
+      "text": "[[/abs]]",
+      "kind": "note",
+      "path": "/abs",
+      "scope": 2
+    },
+    {
+      "line": 12,
+      "text": "[[a/../b]]",
+      "kind": "note",
+      "path": "a/../b",
+      "scope": 2
+    },
+    {
+      "line": 13,
+      "text": "[[a//b]]",
+      "kind": "note",
+      "path": "a//b",
+      "scope": 2
+    },
+    {
+      "line": 14,
+      "text": "[[a/]]",
+      "kind": "note",
+      "path": "a/",
+      "scope": 2
+    },
+    {
+      "line": 15,
+      "text": "[[#]]",
+      "kind": "anchor",
+      "anchor": "",
+      "scope": 2
+    },
+    {
+      "line": 16,
+      "text": "[[a#]]",
+      "kind": "note",
+      "path": "a",
+      "anchor": "",
+      "scope": 2
+    },
+    {
+      "line": 17,
+      "text": "[[img/a.png#x]]",
+      "kind": "file",
+      "path": "img/a.png",
+      "anchor": "x",
+      "scope": 2
+    },
+    {
+      "line": 20,
+      "text": "[[ spaced target | spaced label ]]",
+      "kind": "note",
+      "path": "spaced target",
+      "label": "spaced label",
+      "scope": 3
+    },
+    {
+      "line": 21,
+      "text": "[[a|b|c]]",
+      "kind": "note",
+      "path": "a",
+      "label": "b|c",
+      "scope": 3
+    },
+    {
+      "line": 22,
+      "text": "[[a\\|b|label]]",
+      "kind": "note",
+      "path": "a|b",
+      "label": "label",
+      "scope": 3
+    },
+    {
+      "line": 23,
+      "text": "[[a\\]]b]]",
+      "kind": "note",
+      "path": "a]]b",
+      "scope": 3
+    },
+    {
+      "line": 26,
+      "text": "[[a]]",
+      "kind": "note",
+      "path": "a",
+      "scope": 3
+    },
+    {
+      "line": 26,
+      "text": "[[b]]",
+      "kind": "note",
+      "path": "b",
+      "scope": 3
+    },
+    {
+      "line": 28,
+      "text": "[[x `y`]]",
+      "kind": "note",
+      "path": "x `y`",
+      "scope": 3
+    }
+  ],
+  "inlines": [
+    {
+      "line": 27,
+      "kind": "code",
+      "content": "[[in code]]"
+    }
+  ],
+  "diagnostics": [
+    {
+      "code": "L001",
+      "line": 11,
+      "text": "/abs"
+    },
+    {
+      "code": "L001",
+      "line": 12,
+      "text": "a/../b"
+    },
+    {
+      "code": "L001",
+      "line": 13,
+      "text": "a//b"
+    },
+    {
+      "code": "L001",
+      "line": 14,
+      "text": "a/"
+    },
+    {
+      "code": "L001",
+      "line": 15,
+      "text": "#"
+    },
+    {
+      "code": "L001",
+      "line": 16,
+      "text": "a#"
+    },
+    {
+      "code": "L002",
+      "line": 17,
+      "text": "img/a.png#x"
+    }
+  ]
+}

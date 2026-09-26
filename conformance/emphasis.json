@@ -1,0 +1,159 @@
+{
+  "lines": [
+    "text:0",
+    "text:0",
+    "text:0",
+    "text:0",
+    "text:0",
+    "text:0",
+    "text:0",
+    "text:0",
+    "text:0",
+    "text:0",
+    "text:0",
+    "item:1",
+    "row:2",
+    "text:0",
+    "text:0"
+  ],
+  "scopes": [
+    {
+      "kind": "file",
+      "extent": [
+        1,
+        15
+      ],
+      "metadata": {
+        "a": [
+          "*token*"
+        ]
+      }
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 12,
+      "parent": 0,
+      "extent": [
+        12,
+        12
+      ]
+    },
+    {
+      "kind": "row",
+      "table": 0,
+      "cells": [
+        "*in*",
+        "*a cell*",
+        "*spans",
+        "cells*"
+      ],
+      "line": 13,
+      "parent": 0,
+      "extent": [
+        13,
+        13
+      ]
+    }
+  ],
+  "links": [
+    {
+      "line": 14,
+      "text": "[[*link*]]",
+      "kind": "note",
+      "path": "*link*",
+      "scope": 0
+    }
+  ],
+  "inlines": [
+    {
+      "line": 1,
+      "kind": "bold",
+      "content": "bold"
+    },
+    {
+      "line": 1,
+      "kind": "underline",
+      "content": "underline"
+    },
+    {
+      "line": 3,
+      "kind": "bold",
+      "content": "_both_"
+    },
+    {
+      "line": 3,
+      "kind": "underline",
+      "content": "both"
+    },
+    {
+      "line": 3,
+      "kind": "underline",
+      "content": "*both*"
+    },
+    {
+      "line": 3,
+      "kind": "bold",
+      "content": "both"
+    },
+    {
+      "line": 4,
+      "kind": "bold",
+      "content": "a _b"
+    },
+    {
+      "line": 5,
+      "kind": "bold",
+      "content": "a *b"
+    },
+    {
+      "line": 6,
+      "kind": "bold",
+      "content": "*x"
+    },
+    {
+      "line": 10,
+      "kind": "bold",
+      "content": "quoted"
+    },
+    {
+      "line": 12,
+      "kind": "bold",
+      "content": "in an item"
+    },
+    {
+      "line": 13,
+      "kind": "bold",
+      "content": "in"
+    },
+    {
+      "line": 13,
+      "kind": "bold",
+      "content": "a cell"
+    },
+    {
+      "line": 14,
+      "kind": "code",
+      "content": "*code*"
+    },
+    {
+      "line": 15,
+      "kind": "bold",
+      "content": "a `b*` c"
+    },
+    {
+      "line": 15,
+      "kind": "code",
+      "content": "b*"
+    }
+  ],
+  "tables": [
+    {
+      "lines": [
+        13,
+        13
+      ]
+    }
+  ]
+}

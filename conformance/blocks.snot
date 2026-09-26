@@ -1,0 +1,20 @@
+# Blocks
+```x``` is inline code, not a fence
+````
+four backticks
+```
+three backticks don't close four
+`````
+after
+
+- item
+  ```sh
+  echo @inside
+
+  echo blank line above
+  ```
+  continuation after the block @cont
+
+$$  
+  x
+  $$

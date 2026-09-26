@@ -1,0 +1,341 @@
+{
+  "lines": [
+    "heading:1",
+    "item:2",
+    "item:3",
+    "item:4",
+    "item:5",
+    "item:6",
+    "item:7",
+    "item:8",
+    "item:9",
+    "item:10",
+    "item:11",
+    "item:12",
+    "item:13",
+    "item:14",
+    "item:15",
+    "item:16",
+    "item:17",
+    "blank",
+    "heading:18",
+    "text:18",
+    "text:18",
+    "text:18",
+    "text:18",
+    "text:18",
+    "text:18",
+    "text:18",
+    "text:18"
+  ],
+  "scopes": [
+    {
+      "kind": "file",
+      "extent": [
+        1,
+        27
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "forms",
+      "line": 1,
+      "parent": 0,
+      "extent": [
+        1,
+        18
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 2,
+      "parent": 1,
+      "extent": [
+        2,
+        2
+      ],
+      "metadata": {
+        "urgent": [
+          "true"
+        ]
+      }
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 3,
+      "parent": 1,
+      "extent": [
+        3,
+        3
+      ],
+      "metadata": {
+        "due": [
+          "2026-10-01"
+        ]
+      }
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 4,
+      "parent": 1,
+      "extent": [
+        4,
+        4
+      ],
+      "metadata": {
+        "person": [
+          "bob",
+          "priya"
+        ]
+      }
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 5,
+      "parent": 1,
+      "extent": [
+        5,
+        5
+      ],
+      "metadata": {
+        "tags": []
+      }
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 6,
+      "parent": 1,
+      "extent": [
+        6,
+        6
+      ],
+      "metadata": {
+        "x": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 7,
+      "parent": 1,
+      "extent": [
+        7,
+        7
+      ],
+      "metadata": {
+        "client": [
+          "Acme Corp"
+        ]
+      }
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 8,
+      "parent": 1,
+      "extent": [
+        8,
+        8
+      ],
+      "metadata": {
+        "x": [
+          "a, b",
+          "c]d"
+        ],
+        "y": [
+          "a\\"
+        ],
+        "z": [
+          "[not-a-list"
+        ]
+      }
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 9,
+      "parent": 1,
+      "extent": [
+        9,
+        9
+      ],
+      "metadata": {
+        "x": [
+          "a|b"
+        ]
+      }
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 10,
+      "parent": 1,
+      "extent": [
+        10,
+        10
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 11,
+      "parent": 1,
+      "extent": [
+        11,
+        11
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 12,
+      "parent": 1,
+      "extent": [
+        12,
+        12
+      ],
+      "metadata": {
+        "due": [
+          "2026-10-01."
+        ]
+      }
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 13,
+      "parent": 1,
+      "extent": [
+        13,
+        13
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 14,
+      "parent": 1,
+      "extent": [
+        14,
+        14
+      ],
+      "metadata": {
+        "helloWorld": [
+          "true"
+        ]
+      }
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 15,
+      "parent": 1,
+      "extent": [
+        15,
+        15
+      ],
+      "metadata": {
+        "Due": [
+          "2026-10-01"
+        ],
+        "due": [
+          "2026-10-02"
+        ]
+      }
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 16,
+      "parent": 1,
+      "extent": [
+        16,
+        16
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 17,
+      "parent": 1,
+      "extent": [
+        17,
+        17
+      ],
+      "metadata": {
+        "last": [
+          "true"
+        ]
+      }
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "recognition",
+      "line": 19,
+      "parent": 0,
+      "extent": [
+        19,
+        27
+      ],
+      "metadata": {
+        "Bob": [
+          "true"
+        ],
+        "start": [
+          "true"
+        ],
+        "a": [
+          "b@c",
+          "`b`"
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "line": 25,
+      "text": "[[@link]]",
+      "kind": "note",
+      "path": "@link",
+      "scope": 18
+    }
+  ],
+  "inlines": [
+    {
+      "line": 25,
+      "kind": "code",
+      "content": "@code"
+    },
+    {
+      "line": 25,
+      "kind": "math",
+      "content": "@math"
+    }
+  ]
+}

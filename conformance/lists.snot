@@ -1,0 +1,29 @@
+# Loose list
+- a
+
+- b
+  - b1
+
+  - b2 is b1's sibling after a blank line
+
+# Orphans
+  - orphan at depth 1 is read as depth 0
+- x
+    - skipping a level is an orphan too
+
+# Numbering
++ one
+  + nested one
+  + nested two
++ two
+  + nested again starts at one
+- unordered items don't count
++ three
+7. seven
++ eight
+
+text ends the list
+
++ one again
+99999999999999999999999. saturates
++ stays saturated

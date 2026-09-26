@@ -1,0 +1,48 @@
+{
+  "lines": [
+    "heading:1",
+    "heading:2"
+  ],
+  "scopes": [
+    {
+      "kind": "file",
+      "extent": [
+        1,
+        2
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "atlas-kickoff",
+      "line": 1,
+      "parent": 0,
+      "extent": [
+        1,
+        2
+      ],
+      "metadata": {
+        "project": [
+          "atlas"
+        ]
+      }
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "slug": "decisions",
+      "line": 2,
+      "parent": 1,
+      "extent": [
+        2,
+        2
+      ],
+      "metadata": {
+        "id": [
+          "decisions"
+        ]
+      },
+      "id": "decisions"
+    }
+  ]
+}

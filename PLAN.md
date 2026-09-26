@@ -89,9 +89,11 @@ impl Scope {
 
 Tests:
 
-- `conformance/` pairs of `*.snot` and expected JSON (scopes, metadata, links,
-  diagnostics), compared with `insta` snapshots. Every example in the spec is
-  one of them.
+- `conformance/` pairs of `*.snot` and expected JSON (line owners, scopes,
+  metadata, links, inlines, blocks, tables, diagnostics), in a format any
+  reader can produce (`conformance/README.md`). Every example in the spec is
+  one of them, enforced by a test. `SNOT_BLESS=1` rewrites the JSON, which is
+  then reviewed by hand against the spec.
 - A `proptest` that the parser never panics on arbitrary input.
 
 ## 2. `snot fmt`
@@ -142,14 +144,18 @@ reverse maps:
 
 Target: index 10k notes in under a second.
 
-**`snot check [PATHS…] [--format human|json] [--deny warnings]`** reports:
+**`snot check [PATHS…] [--format human|json] [--deny warnings]`** reports the
+parser's diagnostics (S001–S005, L001–L002, from `snot-syntax`) plus the
+workspace checks (L003–L005):
 
 | Code | Severity | Problem                                                  |
 | ---- | -------- | -------------------------------------------------------- |
 | S001 | error    | tab in indentation (§2.3)                                |
-| S002 | warning  | list item deeper than depth 0 with no parent (§5.1)      |
-| S003 | error    | `@id` not a single key-shaped value, or repeated in file |
-| L001 | error    | link path starts with `/` or contains `..` (§7.2)        |
+| S002 | error    | list item deeper than depth 0 with no parent (§5.1)      |
+| S003 | error    | `@id` not a single key-shaped value (§6.6)               |
+| S004 | error    | `@id` repeated in the file (§6.6)                        |
+| S005 | warning  | code or math block with no closing fence (§9.1)          |
+| L001 | error    | link path starts with `/`, contains `..` or an empty segment, or empty anchor (§7.2) |
 | L002 | error    | anchor on a file link, e.g. `[[a.png#x]]`                |
 | L003 | warning  | note link target doesn't exist                           |
 | L004 | warning  | anchor doesn't resolve (§7.3)                            |

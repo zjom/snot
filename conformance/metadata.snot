@@ -1,0 +1,27 @@
+# Forms
+- flag @urgent
+- scalar @due:2026-10-01
+- list @person:[bob, priya]
+- empty list @tags:[]
+- empty items are dropped @x:[a, , b,]
+- spaces inside items @client:[Acme Corp]
+- escapes @x:[a\, b, c\]d] @y:a\ b @z:\[not-a-list
+- bar in a list outside a table @x:[a|b]
+- a colon with no value is text @key: then
+- unclosed list @key:[a, b is text
+- trailing punctuation @due:2026-10-01.
+- flags before punctuation are text @urgent, @later.
+- mixed case is one key @helloWorld
+- keys are case-sensitive @Due:2026-10-01 @due:2026-10-02
+- a flag must end at whitespace @key.name
+- a flag at the end of the line @last
+
+# Recognition
+bob@example.com is text
+@Bob is a key; @1x and @-x and @_x are text
+(@paren is text
+@start of a line
+\@escaped is text
+`@code` and $@math$ and [[@link]] hold no tokens
+@a:b@c is one scalar
+@a:`b` takes the backticks

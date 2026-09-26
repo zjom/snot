@@ -27,8 +27,9 @@
                 ./Cargo.toml
                 ./Cargo.lock
                 ./crates
-                # Test fixtures, once they exist (PLAN.md).
-                (lib.fileset.maybeMissing ./conformance)
+                # Tests read the spec and the conformance corpus.
+                ./NOTE_SPEC.md
+                ./conformance
               ];
             };
             cargoLock.lockFile = ./Cargo.lock;
@@ -56,7 +57,6 @@
               pkgs.clippy
               pkgs.rustfmt
               pkgs.rust-analyzer
-              pkgs.cargo-insta # snapshot tests (conformance corpus)
               pkgs.cargo-dist # release binaries
             ];
             # rust-analyzer needs the standard library source.

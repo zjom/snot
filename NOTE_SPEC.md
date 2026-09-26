@@ -19,7 +19,7 @@ The key words MUST, MUST NOT, SHOULD and MAY are to be interpreted as in RFC 211
 
 ### 2.1 Files
 
-A note is a file. Files MUST be UTF-8. Lines end with LF or CRLF; readers MUST accept both. The note file extension is set by the collection and defaults to `.snot`.
+A note is a file. Files MUST be UTF-8. Lines end with LF or CRLF; readers MUST accept both. Readers MUST ignore a leading byte order mark (U+FEFF). In this spec, _whitespace_ means space and tab only, and _punctuation_ means ASCII punctuation. The note file extension is set by the collection and defaults to `.snot`.
 
 The _notes root_ is the top directory of a collection. Link paths (section 7) are relative to it.
 
@@ -38,7 +38,7 @@ Every line is exactly one of these, tested in this order:
 
 ### 2.3 Indentation
 
-Indentation MUST use spaces; a tab in leading whitespace is an error. One level is 2 spaces. A line with _n_ leading spaces is at depth floor(_n_ / 2).
+Indentation MUST use spaces; a tab in leading whitespace is an error, and readers SHOULD count it as 2 spaces. One level is 2 spaces. A line with _n_ leading spaces is at depth floor(_n_ / 2).
 
 ### 2.4 Escapes
 
@@ -84,9 +84,9 @@ A list item line is indentation, a marker, one space, then content.
 | `+`             | Ordered, implicit number | `+ milk`   |
 | digits then `.` | Ordered, explicit number | `12. milk` |
 
-An item at depth _d_ + 1 is a child of the nearest item above it at depth _d_. An item deeper than depth 0 with no such parent is an error; readers SHOULD treat it as depth 0.
+A _list_ is a run of items and the lines they own. Blank lines don't end a list; a heading, or any other line no item owns, does. An item at depth _d_ + 1 is a child of the nearest item above it in the same list at depth _d_, with no item at a lesser depth between them. An item deeper than depth 0 with no such parent is an error; readers SHOULD treat it as depth 0.
 
-`+` and `N.` items are both ordered and differ only in how the number is given. Explicit numbers are kept as written; readers MUST NOT renumber them. A `+` item has no written number. A reader that displays one SHOULD use one more than the number of the previous ordered item at the same depth in the same list (written or derived), or 1 if there is none:
+`+` and `N.` items are both ordered and differ only in how the number is given. Explicit numbers are kept as written; readers MUST NOT renumber them. A `+` item has no written number. A reader that displays one SHOULD use one more than the number of the previous ordered item with the same parent in the same list (written or derived), or 1 if there is none:
 
 ```
 + Draft          (1)
@@ -131,13 +131,14 @@ Metadata is written as _tokens_ anywhere in inline content. A token attaches one
 
 ### 6.2 Recognition
 
-- `@` starts a token only at the start of a line or right after whitespace. `bob@example.com` is text.
-- A key is a lowercase ASCII letter followed by lowercase letters, digits, `-` or `_`. `@Bob` and `@1x` are text.
+- `@` starts a token only at the start of a line, right after whitespace, or at the start of a table cell (right after its `|`). `bob@example.com` is text.
+- A key is an ASCII letter, either case, followed by ASCII letters, digits, `-` or `_`. Keys are case-sensitive: `@Due` and `@due` are different keys. `@1x` and `@-x` are text.
+- A flag ends at whitespace or the end of the line (in a table row, also at the cell's closing `|`). Anything else directly after its key makes the whole token text: `@urgent,`, `@key.name` and `@key:` are text.
 - Tokens are not recognised inside links, code, math or other tokens.
 
 ### 6.3 Values
 
-- **Scalar:** everything after `:` up to the next whitespace or end of line. It MUST NOT start with `[`. Writers SHOULD NOT put punctuation directly after a token (write `@due:2026-10-01 .`, or put the token elsewhere); a trailing `.` would be part of the value.
+- **Scalar:** everything after `:` up to the next whitespace or end of line. It MUST NOT start with `[`. Writers SHOULD NOT put punctuation directly after a token (write `@due:2026-10-01 .`, or put the token elsewhere): a trailing `.` would be part of a scalar's value, and makes a flag text.
 - **List:** `[`, then items separated by `,`, then `]`, all on the same line. Whitespace around each item is trimmed and empty items are dropped. Items may contain spaces; `\,` and `\]` escape a literal comma or bracket. An unclosed `[` makes the whole token text.
 - Values are strings. Readers MUST NOT interpret them beyond this section, except for the conventions in 6.5.
 
@@ -161,7 +162,7 @@ Duplicate values are kept; readers MAY deduplicate. Tokens in child scopes never
 
 ### 6.6 Reserved keys
 
-`@id` is the only reserved key. It names a scope as a link anchor (section 7.3). It MUST be a single value matching the key syntax, and MUST be unique within its file. All other keys are free for any use.
+`@id` is the only reserved key. It names a scope as a link anchor (section 7.3). It MUST be a single value matching the key syntax, and MUST be unique within its file. A bare `@id`, with no value, is an error. All other keys are free for any use.
 
 ## 7. Links
 
@@ -317,7 +318,7 @@ verbatim      = *char                      ; any line but the closing fence
 
 heading       = 1*6"#" SP inline
 item          = indent marker SP [taskbox (SP / EOL-AHEAD)] inline
-indent        = *(2SP)
+indent        = *SP                        ; depth = floor(count / 2), section 2.3
 marker        = "-" / ordered-marker
 ordered-marker = "+" / 1*DIGIT "."         ; "+" = implicit number
 taskbox       = "[" (SP / "x" / "-") "]"
@@ -334,8 +335,9 @@ escape        = "\" PUNCT
 code-span     = n"`" 1*char n"`"          ; same run length n; content has no run of exactly n
 math-span     = "$" NONWS [*char NONWS] "$"  ; closing "$" not followed by DIGIT
 
-token         = "@" key [":" value]      ; only at line start or after WSP
-key           = LCALPHA *(LCALPHA / DIGIT / "-" / "_")
+token         = "@" key [":" value]      ; only at line start or after WSP;
+                                           ; a flag is followed by WSP or EOL
+key           = ALPHA *(ALPHA / DIGIT / "-" / "_")   ; case-sensitive
 value         = list / scalar
 scalar        = scalar-first *(escape / NONWS)
 scalar-first  = escape / (NONWS except "[")
@@ -355,7 +357,6 @@ bold          = "*" 1*inline-char "*"          ; boundary rules in 8
 underline     = "_" 1*inline-char "_"
 
 EOL           = LF / CRLF                  ; optional after the last line
-LCALPHA       = %x61-7A
 PUNCT         = %x21-2F / %x3A-40 / %x5B-60 / %x7B-7E
 NONWS         = any char except WSP
 char          = any Unicode scalar except CR / LF
@@ -426,7 +427,7 @@ grep -rn '@due:2026-10' .
 grep -rnE '@person:(bob([[:space:]]|$)|\[([^]]*,)?[[:space:]]*bob[[:space:]]*[],])' .
 
 # Every key in use, with counts
-grep -rhoE '(^|[[:space:]])@[a-z][a-z0-9_-]*' . | tr -d ' \t' | sort | uniq -c
+grep -rhoE '(^|[[:space:]])@[A-Za-z][A-Za-z0-9_-]*' . | tr -d ' \t' | sort | uniq -c
 
 # Backlinks to a note
 grep -rnE '\[\[projects/atlas(#|\||\]\])' .

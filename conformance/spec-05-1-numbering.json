@@ -1,0 +1,65 @@
+{
+  "lines": [
+    "item:1",
+    "item:2",
+    "item:3",
+    "item:4"
+  ],
+  "scopes": [
+    {
+      "kind": "file",
+      "extent": [
+        1,
+        4
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "+",
+      "number": 1,
+      "line": 1,
+      "parent": 0,
+      "extent": [
+        1,
+        1
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "+",
+      "number": 2,
+      "line": 2,
+      "parent": 0,
+      "extent": [
+        2,
+        2
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "5.",
+      "number": 5,
+      "line": 3,
+      "parent": 0,
+      "extent": [
+        3,
+        3
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "+",
+      "number": 6,
+      "line": 4,
+      "parent": 0,
+      "extent": [
+        4,
+        4
+      ]
+    }
+  ]
+}

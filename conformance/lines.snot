@@ -1,0 +1,18 @@
+# Line kinds
+#text is text
+####### seven hashes is text
+ # indented is text
+\# escaped is text
+\+ escaped is text
+\- escaped is text
+-no space is text
+-
+- 
+1.no space is text
+1) is text
+12. twelve
++ plus
+|row
+   
+text after a whitespace-only line
+# 

@@ -1,0 +1,307 @@
+{
+  "lines": [
+    "heading:1",
+    "item:2",
+    "blank",
+    "item:3",
+    "item:4",
+    "blank",
+    "item:5",
+    "blank",
+    "heading:6",
+    "item:7",
+    "item:8",
+    "item:9",
+    "blank",
+    "heading:10",
+    "item:11",
+    "item:12",
+    "item:13",
+    "item:14",
+    "item:15",
+    "item:16",
+    "item:17",
+    "item:18",
+    "item:19",
+    "blank",
+    "text:10",
+    "blank",
+    "item:20",
+    "item:21",
+    "item:22"
+  ],
+  "scopes": [
+    {
+      "kind": "file",
+      "extent": [
+        1,
+        29
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "loose-list",
+      "line": 1,
+      "parent": 0,
+      "extent": [
+        1,
+        8
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 2,
+      "parent": 1,
+      "extent": [
+        2,
+        2
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 4,
+      "parent": 1,
+      "extent": [
+        4,
+        7
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 1,
+      "marker": "-",
+      "line": 5,
+      "parent": 3,
+      "extent": [
+        5,
+        5
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 1,
+      "marker": "-",
+      "line": 7,
+      "parent": 3,
+      "extent": [
+        7,
+        7
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "orphans",
+      "line": 9,
+      "parent": 0,
+      "extent": [
+        9,
+        13
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 10,
+      "parent": 6,
+      "extent": [
+        10,
+        10
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 11,
+      "parent": 6,
+      "extent": [
+        11,
+        11
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 12,
+      "parent": 6,
+      "extent": [
+        12,
+        12
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "numbering",
+      "line": 14,
+      "parent": 0,
+      "extent": [
+        14,
+        29
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "+",
+      "number": 1,
+      "line": 15,
+      "parent": 10,
+      "extent": [
+        15,
+        17
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 1,
+      "marker": "+",
+      "number": 1,
+      "line": 16,
+      "parent": 11,
+      "extent": [
+        16,
+        16
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 1,
+      "marker": "+",
+      "number": 2,
+      "line": 17,
+      "parent": 11,
+      "extent": [
+        17,
+        17
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "+",
+      "number": 2,
+      "line": 18,
+      "parent": 10,
+      "extent": [
+        18,
+        19
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 1,
+      "marker": "+",
+      "number": 1,
+      "line": 19,
+      "parent": 14,
+      "extent": [
+        19,
+        19
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 20,
+      "parent": 10,
+      "extent": [
+        20,
+        20
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "+",
+      "number": 3,
+      "line": 21,
+      "parent": 10,
+      "extent": [
+        21,
+        21
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "7.",
+      "number": 7,
+      "line": 22,
+      "parent": 10,
+      "extent": [
+        22,
+        22
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "+",
+      "number": 8,
+      "line": 23,
+      "parent": 10,
+      "extent": [
+        23,
+        23
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "+",
+      "number": 1,
+      "line": 27,
+      "parent": 10,
+      "extent": [
+        27,
+        27
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "99999999999999999999999.",
+      "number": 18446744073709551615,
+      "line": 28,
+      "parent": 10,
+      "extent": [
+        28,
+        28
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "+",
+      "number": 18446744073709551615,
+      "line": 29,
+      "parent": 10,
+      "extent": [
+        29,
+        29
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "code": "S002",
+      "line": 10,
+      "text": "-"
+    },
+    {
+      "code": "S002",
+      "line": 12,
+      "text": "-"
+    }
+  ]
+}

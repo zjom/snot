@@ -8,6 +8,13 @@ repository.workspace = true
 license.workspace = true
 
 [dependencies]
+indexmap = "2"
+unicode-normalization = "0.1"
+
+[dev-dependencies]
+proptest = "1"
+serde_json = { version = "1", features = ["preserve_order"] }
+similar = "2"
 
 [lints]
 workspace = true

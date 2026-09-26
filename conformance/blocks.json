@@ -1,0 +1,85 @@
+{
+  "lines": [
+    "heading:1",
+    "text:1",
+    "fence:1",
+    "verbatim:1",
+    "verbatim:1",
+    "verbatim:1",
+    "fence:1",
+    "text:1",
+    "blank",
+    "item:2",
+    "fence:2",
+    "verbatim:2",
+    "verbatim:2",
+    "verbatim:2",
+    "fence:2",
+    "text:2",
+    "blank",
+    "fence:1",
+    "verbatim:1",
+    "fence:1"
+  ],
+  "scopes": [
+    {
+      "kind": "file",
+      "extent": [
+        1,
+        20
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "blocks",
+      "line": 1,
+      "parent": 0,
+      "extent": [
+        1,
+        20
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 10,
+      "parent": 1,
+      "extent": [
+        10,
+        16
+      ],
+      "metadata": {
+        "cont": [
+          "true"
+        ]
+      }
+    }
+  ],
+  "inlines": [
+    {
+      "line": 2,
+      "kind": "code",
+      "content": "x"
+    }
+  ],
+  "blocks": [
+    {
+      "kind": "code",
+      "open": 3,
+      "close": 7
+    },
+    {
+      "kind": "code",
+      "language": "sh",
+      "open": 11,
+      "close": 15
+    },
+    {
+      "kind": "math",
+      "open": 18,
+      "close": 20
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "lines": [
+    "text:0",
+    "blank",
+    "item:1",
+    "text:1",
+    "text:1",
+    "item:2",
+    "text:1",
+    "text:0",
+    "blank",
+    "item:3",
+    "blank",
+    "text:0",
+    "blank",
+    "heading:4",
+    "text:4",
+    "heading:5",
+    "heading:6",
+    "heading:7",
+    "heading:8"
+  ],
+  "scopes": [
+    {
+      "kind": "file",
+      "extent": [
+        1,
+        19
+      ],
+      "metadata": {
+        "filemeta": [
+          "true"
+        ],
+        "f": [
+          "true"
+        ],
+        "g": [
+          "true"
+        ]
+      }
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 3,
+      "parent": 0,
+      "extent": [
+        3,
+        7
+      ],
+      "metadata": {
+        "a": [
+          "true"
+        ],
+        "b": [
+          "true"
+        ],
+        "c": [
+          "true"
+        ],
+        "e": [
+          "true"
+        ]
+      }
+    },
+    {
+      "kind": "item",
+      "depth": 1,
+      "marker": "-",
+      "line": 6,
+      "parent": 1,
+      "extent": [
+        6,
+        6
+      ],
+      "metadata": {
+        "d": [
+          "true"
+        ]
+      }
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 10,
+      "parent": 0,
+      "extent": [
+        10,
+        10
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "heading",
+      "line": 14,
+      "parent": 0,
+      "extent": [
+        14,
+        18
+      ],
+      "metadata": {
+        "h": [
+          "true"
+        ],
+        "i": [
+          "true"
+        ]
+      }
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "slug": "sub",
+      "line": 16,
+      "parent": 4,
+      "extent": [
+        16,
+        17
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "slug": "subsub",
+      "line": 17,
+      "parent": 5,
+      "extent": [
+        17,
+        17
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "slug": "sub-two",
+      "line": 18,
+      "parent": 4,
+      "extent": [
+        18,
+        18
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "top-two",
+      "line": 19,
+      "parent": 0,
+      "extent": [
+        19,
+        19
+      ]
+    }
+  ]
+}

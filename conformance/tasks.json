@@ -1,0 +1,142 @@
+{
+  "lines": [
+    "item:1",
+    "item:2",
+    "item:3",
+    "item:4",
+    "item:5",
+    "item:6",
+    "item:7",
+    "item:8",
+    "item:9",
+    "item:10"
+  ],
+  "scopes": [
+    {
+      "kind": "file",
+      "extent": [
+        1,
+        10
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "task": "open",
+      "line": 1,
+      "parent": 0,
+      "extent": [
+        1,
+        1
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "task": "done",
+      "line": 2,
+      "parent": 0,
+      "extent": [
+        2,
+        2
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "task": "cancelled",
+      "line": 3,
+      "parent": 0,
+      "extent": [
+        3,
+        3
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 4,
+      "parent": 0,
+      "extent": [
+        4,
+        4
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 5,
+      "parent": 0,
+      "extent": [
+        5,
+        5
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "task": "open",
+      "line": 6,
+      "parent": 0,
+      "extent": [
+        6,
+        6
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 7,
+      "parent": 0,
+      "extent": [
+        7,
+        7
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "1.",
+      "number": 1,
+      "task": "open",
+      "line": 8,
+      "parent": 0,
+      "extent": [
+        8,
+        8
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "+",
+      "number": 2,
+      "task": "done",
+      "line": 9,
+      "parent": 0,
+      "extent": [
+        9,
+        9
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "task": "open",
+      "line": 10,
+      "parent": 0,
+      "extent": [
+        10,
+        10
+      ]
+    }
+  ]
+}

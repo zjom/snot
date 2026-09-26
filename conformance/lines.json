@@ -1,0 +1,109 @@
+{
+  "lines": [
+    "heading:1",
+    "text:1",
+    "text:1",
+    "text:1",
+    "text:1",
+    "text:1",
+    "text:1",
+    "text:1",
+    "text:1",
+    "item:2",
+    "text:1",
+    "text:1",
+    "item:3",
+    "item:4",
+    "row:5",
+    "blank",
+    "text:1",
+    "heading:6"
+  ],
+  "scopes": [
+    {
+      "kind": "file",
+      "extent": [
+        1,
+        18
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "line-kinds",
+      "line": 1,
+      "parent": 0,
+      "extent": [
+        1,
+        17
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 10,
+      "parent": 1,
+      "extent": [
+        10,
+        10
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "12.",
+      "number": 12,
+      "line": 13,
+      "parent": 1,
+      "extent": [
+        13,
+        13
+      ]
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "+",
+      "number": 13,
+      "line": 14,
+      "parent": 1,
+      "extent": [
+        14,
+        14
+      ]
+    },
+    {
+      "kind": "row",
+      "table": 0,
+      "cells": [
+        "row"
+      ],
+      "line": 15,
+      "parent": 1,
+      "extent": [
+        15,
+        15
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "",
+      "line": 18,
+      "parent": 0,
+      "extent": [
+        18,
+        18
+      ]
+    }
+  ],
+  "tables": [
+    {
+      "lines": [
+        15,
+        15
+      ]
+    }
+  ]
+}

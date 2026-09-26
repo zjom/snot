@@ -1,0 +1,69 @@
+{
+  "lines": [
+    "text:0",
+    "text:0",
+    "text:0",
+    "text:0",
+    "text:0",
+    "text:0",
+    "text:0",
+    "text:0",
+    "text:0"
+  ],
+  "scopes": [
+    {
+      "kind": "file",
+      "extent": [
+        1,
+        9
+      ]
+    }
+  ],
+  "inlines": [
+    {
+      "line": 1,
+      "kind": "code",
+      "content": "code"
+    },
+    {
+      "line": 1,
+      "kind": "code",
+      "content": "co`de"
+    },
+    {
+      "line": 1,
+      "kind": "code",
+      "content": "spaced"
+    },
+    {
+      "line": 1,
+      "kind": "code",
+      "content": ""
+    },
+    {
+      "line": 3,
+      "kind": "math",
+      "content": "x^2"
+    },
+    {
+      "line": 6,
+      "kind": "math",
+      "content": "5 then \\"
+    },
+    {
+      "line": 7,
+      "kind": "math",
+      "content": "a $b"
+    },
+    {
+      "line": 8,
+      "kind": "math",
+      "content": "$x"
+    },
+    {
+      "line": 9,
+      "kind": "math",
+      "content": "b"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+- top
+	- tab-indented child
+   - three spaces is depth 1
+    - four spaces is depth 2
+  	text with a tab after spaces

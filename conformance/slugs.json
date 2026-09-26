@@ -1,0 +1,143 @@
+{
+  "lines": [
+    "heading:1",
+    "heading:2",
+    "heading:3",
+    "heading:4",
+    "heading:5",
+    "heading:6",
+    "heading:7",
+    "heading:8",
+    "heading:9"
+  ],
+  "scopes": [
+    {
+      "kind": "file",
+      "extent": [
+        1,
+        9
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "café-über",
+      "line": 1,
+      "parent": 0,
+      "extent": [
+        1,
+        1
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "日本語メモ",
+      "line": 2,
+      "parent": 0,
+      "extent": [
+        2,
+        3
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "slug": "open-risks-q4",
+      "line": 3,
+      "parent": 2,
+      "extent": [
+        3,
+        3
+      ],
+      "metadata": {
+        "status": [
+          "open"
+        ]
+      }
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "café-decomposed",
+      "line": 4,
+      "parent": 0,
+      "extent": [
+        4,
+        4
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "σίσυφος",
+      "line": 5,
+      "parent": 0,
+      "extent": [
+        5,
+        5
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "",
+      "line": 6,
+      "parent": 0,
+      "extent": [
+        6,
+        6
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "ünïcödé-123-½",
+      "line": 7,
+      "parent": 0,
+      "extent": [
+        7,
+        7
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "snake-case-and-kebab-case",
+      "line": 8,
+      "parent": 0,
+      "extent": [
+        8,
+        8
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "link-label-and-code",
+      "line": 9,
+      "parent": 0,
+      "extent": [
+        9,
+        9
+      ]
+    }
+  ],
+  "links": [
+    {
+      "line": 9,
+      "text": "[[link|Label]]",
+      "kind": "note",
+      "path": "link",
+      "label": "Label",
+      "scope": 9
+    }
+  ],
+  "inlines": [
+    {
+      "line": 9,
+      "kind": "code",
+      "content": "code"
+    }
+  ]
+}

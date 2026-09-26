@@ -1,0 +1,15 @@
+*bold* and _underline_
+snake_case_name and 2*3*4 and */ are text
+*_both_* and _*both*_
+*a _b* c_ crosses
+*a *b* c* doesn't nest in itself
+**x** doubled
+* not opening
+*not closing *
+word*s* inside a word
+"*quoted*" after punctuation
+*unclosed
+- *in an item*
+| *in* | *a cell* | *spans | cells* |
+`*code*` [[*link*]] @a:*token* hold no emphasis
+*a `b*` c* can't close inside code

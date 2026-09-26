@@ -1,0 +1,31 @@
+{
+  "lines": [
+    "text:0",
+    "heading:1"
+  ],
+  "scopes": [
+    {
+      "kind": "file",
+      "extent": [
+        1,
+        2
+      ],
+      "metadata": {
+        "created": [
+          "2026-09-26"
+        ]
+      }
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "title",
+      "line": 2,
+      "parent": 0,
+      "extent": [
+        2,
+        2
+      ]
+    }
+  ]
+}

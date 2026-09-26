@@ -1,0 +1,26 @@
+{
+  "lines": [
+    "text:0",
+    "text:0",
+    "text:0"
+  ],
+  "scopes": [
+    {
+      "kind": "file",
+      "extent": [
+        1,
+        3
+      ],
+      "metadata": {
+        "person": [
+          "bob",
+          "priya",
+          "bob",
+          "priya",
+          "bob",
+          "priya"
+        ]
+      }
+    }
+  ]
+}

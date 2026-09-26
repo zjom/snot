@@ -1,0 +1,19 @@
+File text owned by the file @filemeta
+
+- one @a
+  continuation of one @b
+    deeper continuation of one @c
+  - child @d
+  continuation after the child belongs to one @e
+text at depth 0 ends the item @f
+
+- two
+
+  after a blank line, not a continuation @g
+
+# Heading @h
+text under the heading @i
+## Sub
+### Subsub
+## Sub two
+# Top two

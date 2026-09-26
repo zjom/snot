@@ -1,0 +1,211 @@
+{
+  "lines": [
+    "heading:1",
+    "heading:2",
+    "heading:3",
+    "heading:4",
+    "heading:5",
+    "heading:6",
+    "heading:7",
+    "item:8",
+    "row:9"
+  ],
+  "scopes": [
+    {
+      "kind": "file",
+      "extent": [
+        1,
+        9
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "one",
+      "line": 1,
+      "parent": 0,
+      "extent": [
+        1,
+        1
+      ],
+      "metadata": {
+        "id": [
+          "one"
+        ]
+      },
+      "id": "one"
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "two-values",
+      "line": 2,
+      "parent": 0,
+      "extent": [
+        2,
+        2
+      ],
+      "metadata": {
+        "id": [
+          "two",
+          "three"
+        ]
+      }
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "as-a-list",
+      "line": 3,
+      "parent": 0,
+      "extent": [
+        3,
+        3
+      ],
+      "metadata": {
+        "id": [
+          "four"
+        ]
+      },
+      "id": "four"
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "uppercase",
+      "line": 4,
+      "parent": 0,
+      "extent": [
+        4,
+        4
+      ],
+      "metadata": {
+        "id": [
+          "Bad"
+        ]
+      },
+      "id": "Bad"
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "not-a-key",
+      "line": 5,
+      "parent": 0,
+      "extent": [
+        5,
+        5
+      ],
+      "metadata": {
+        "id": [
+          "9lives"
+        ]
+      }
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "flag-form",
+      "line": 6,
+      "parent": 0,
+      "extent": [
+        6,
+        6
+      ],
+      "metadata": {
+        "id": [
+          "true"
+        ]
+      }
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "duplicate",
+      "line": 7,
+      "parent": 0,
+      "extent": [
+        7,
+        9
+      ],
+      "metadata": {
+        "id": [
+          "one"
+        ]
+      },
+      "id": "one"
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 8,
+      "parent": 7,
+      "extent": [
+        8,
+        8
+      ],
+      "metadata": {
+        "id": [
+          "item-1"
+        ]
+      },
+      "id": "item-1"
+    },
+    {
+      "kind": "row",
+      "table": 0,
+      "cells": [
+        "row",
+        "@id:row_1"
+      ],
+      "line": 9,
+      "parent": 7,
+      "extent": [
+        9,
+        9
+      ],
+      "metadata": {
+        "id": [
+          "row_1"
+        ]
+      },
+      "id": "row_1"
+    }
+  ],
+  "tables": [
+    {
+      "lines": [
+        9,
+        9
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "code": "S003",
+      "line": 2,
+      "text": "@id:two"
+    },
+    {
+      "code": "S003",
+      "line": 2,
+      "text": "@id:three"
+    },
+    {
+      "code": "S003",
+      "line": 5,
+      "text": "@id:9lives"
+    },
+    {
+      "code": "S003",
+      "line": 6,
+      "text": "@id"
+    },
+    {
+      "code": "S004",
+      "line": 7,
+      "text": "@id:one"
+    }
+  ]
+}

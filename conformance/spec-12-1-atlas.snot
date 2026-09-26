@@ -1,0 +1,35 @@
+@area:work @created:2026-09-26
+
+# Atlas kickoff @project:atlas @person:[bob, priya]
+
+Met with Bob about the *new* timeline. See [[projects/atlas-plan#risks|risk list]]
+and the [[https://example.com/brief|client brief]]. Whiteboard: [[img/atlas-wb.png]].
+
+## Decisions @id:decisions
++ Ship beta by end of Oct @due:2026-10-31
++ Drop the _legacy_ importer
++ Cap each import at `MAX_ROWS` rows
+
+## Estimate
+Expected load is $r = n / t$, with `n` taken from the import log:
+
+$$
+r = \frac{12000}{60} = 200 \text{ rows/s}
+$$
+
+```sh
+grep -c import atlas.log   # @count here is not metadata
+```
+
+## Milestones
+| Milestone | Due        | Owner                  |
+|-----------|------------|------------------------|
+| Beta      | 2026-10-31 | @owner:bob @id:beta    |
+| Retro     | 2026-11-07 | @owner:[priya, sam]    |
+
+## Follow-ups @status:open
+- [ ] Send Bob revised plan @due:2026-09-30 @person:bob @id:send-plan
+- [ ] Book design review @urgent @person:[priya, sam]
+  1. [x] Find a room
+  2. [ ] Invite Priya
+- [-] Chase old invoice

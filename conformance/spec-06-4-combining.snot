@@ -1,0 +1,3 @@
+@person:bob @person:priya
+@person:[bob, priya]
+@person:bob @person:[priya]

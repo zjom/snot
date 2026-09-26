@@ -1,0 +1,49 @@
+{
+  "lines": [
+    "heading:1",
+    "item:2",
+    "text:1",
+    "text:1"
+  ],
+  "scopes": [
+    {
+      "kind": "file",
+      "extent": [
+        1,
+        4
+      ]
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "slug": "title",
+      "line": 1,
+      "parent": 0,
+      "extent": [
+        1,
+        4
+      ],
+      "metadata": {
+        "a": [
+          "true"
+        ]
+      }
+    },
+    {
+      "kind": "item",
+      "depth": 0,
+      "marker": "-",
+      "line": 2,
+      "parent": 1,
+      "extent": [
+        2,
+        2
+      ],
+      "metadata": {
+        "b": [
+          "true"
+        ]
+      }
+    }
+  ]
+}

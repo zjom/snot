@@ -1,0 +1,9 @@
+`code` and ``co`de`` and ` spaced ` and `  `
+`unclosed and ``` three
+$x^2$ is math
+$5 and $10 is text
+\$literal and \$ again is text
+$5 then \$ is math: escapes don't apply inside math
+$ not math$ and $a $b$
+$$x$
+a$b$c

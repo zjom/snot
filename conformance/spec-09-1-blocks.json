@@ -1,0 +1,33 @@
+{
+  "lines": [
+    "fence:0",
+    "verbatim:0",
+    "fence:0",
+    "blank",
+    "fence:0",
+    "verbatim:0",
+    "fence:0"
+  ],
+  "scopes": [
+    {
+      "kind": "file",
+      "extent": [
+        1,
+        7
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "kind": "code",
+      "language": "python",
+      "open": 1,
+      "close": 3
+    },
+    {
+      "kind": "math",
+      "open": 5,
+      "close": 7
+    }
+  ]
+}

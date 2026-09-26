@@ -1,0 +1,67 @@
+{
+  "lines": [
+    "row:1",
+    "row:2"
+  ],
+  "scopes": [
+    {
+      "kind": "file",
+      "extent": [
+        1,
+        2
+      ]
+    },
+    {
+      "kind": "row",
+      "table": 0,
+      "cells": [
+        "Beta",
+        "2026-10-31",
+        "@owner:bob @id:beta"
+      ],
+      "line": 1,
+      "parent": 0,
+      "extent": [
+        1,
+        1
+      ],
+      "metadata": {
+        "owner": [
+          "bob"
+        ],
+        "id": [
+          "beta"
+        ]
+      },
+      "id": "beta"
+    },
+    {
+      "kind": "row",
+      "table": 0,
+      "cells": [
+        "Retro",
+        "2026-11-07",
+        "@owner:priya"
+      ],
+      "line": 2,
+      "parent": 0,
+      "extent": [
+        2,
+        2
+      ],
+      "metadata": {
+        "owner": [
+          "priya"
+        ]
+      }
+    }
+  ],
+  "tables": [
+    {
+      "lines": [
+        1,
+        2
+      ]
+    }
+  ]
+}

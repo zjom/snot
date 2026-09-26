@@ -1,0 +1,30 @@
+# Header
+| a | b |
+|---|---|
+| 1 | 2 |
+|---|---|
+| 3 | 4 |
+
+# No header
+| a | b |
+| 1 | 2 |
+
+# Separator first
+|---|
+| a |
+
+# Indentation splits tables
+| a |
+  | b |
+
+# Cells
+| `a|b` | [[x|label]] | a\|b | $a|b$ |
+| @k:v|next | @k:[a|b] |
+|no trailing bar
+|
+||
+| trailing spaces after the bar |   
+| @x| @y |
+
+- item
+  | row in an item @r |
