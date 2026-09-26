@@ -37,6 +37,7 @@
             meta = {
               description = "Reader, formatter, checker and language server for Simple Note Format";
               homepage = "https://github.com/zjom/snot";
+              license = pkgs.lib.licenses.mit;
               mainProgram = "snot";
             };
           };
