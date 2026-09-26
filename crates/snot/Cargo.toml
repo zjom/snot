@@ -1,0 +1,17 @@
+[package]
+name = "snot"
+description = "Formatter, checker and language server for Simple Note Format."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+
+[dependencies]
+snot-syntax.workspace = true
+snot-fmt.workspace = true
+snot-workspace.workspace = true
+snot-check.workspace = true
+snot-lsp.workspace = true
+
+[lints]
+workspace = true

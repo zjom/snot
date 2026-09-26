@@ -1,0 +1,13 @@
+[package]
+name = "snot-workspace"
+description = "A collection of Simple Note Format notes: its root, configuration and cross-note index."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+
+[dependencies]
+snot-syntax.workspace = true
+
+[lints]
+workspace = true

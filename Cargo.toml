@@ -1,6 +1,23 @@
-[package]
-name = "snot"
+[workspace]
+resolver = "3"
+members = ["crates/*"]
+
+[workspace.package]
 version = "0.1.0"
 edition = "2024"
+rust-version = "1.85"
+repository = "https://github.com/zjom/snot"
 
-[dependencies]
+[workspace.dependencies]
+snot-syntax = { path = "crates/snot-syntax" }
+snot-fmt = { path = "crates/snot-fmt" }
+snot-workspace = { path = "crates/snot-workspace" }
+snot-check = { path = "crates/snot-check" }
+snot-lsp = { path = "crates/snot-lsp" }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
