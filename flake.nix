@@ -58,6 +58,7 @@
               pkgs.rustfmt
               pkgs.rust-analyzer
               pkgs.cargo-dist # release binaries
+              pkgs.cargo-release
             ];
             # rust-analyzer needs the standard library source.
             RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
