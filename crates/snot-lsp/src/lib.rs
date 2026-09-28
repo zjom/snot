@@ -24,14 +24,15 @@ use lsp_types::notification::{
 };
 use lsp_types::request::{
     Completion, DocumentLinkRequest, DocumentSymbolRequest, Formatting, GotoDefinition,
-    RangeFormatting, References, RegisterCapability, Request as _, WorkspaceSymbolRequest,
+    HoverRequest, PrepareRenameRequest, RangeFormatting, References, RegisterCapability, Rename,
+    Request as _, WorkspaceSymbolRequest,
 };
 use lsp_types::{
     CompletionOptions, DidChangeWatchedFilesRegistrationOptions, DocumentLinkOptions,
-    FileSystemWatcher, GlobPattern, InitializeParams, NumberOrString, OneOf, PositionEncodingKind,
-    PublishDiagnosticsParams, Registration, RegistrationParams, ServerCapabilities,
-    TextDocumentSyncCapability, TextDocumentSyncKind, TextDocumentSyncOptions,
-    TextDocumentSyncSaveOptions, Url,
+    FileSystemWatcher, GlobPattern, HoverProviderCapability, InitializeParams, NumberOrString,
+    OneOf, PositionEncodingKind, PublishDiagnosticsParams, Registration, RegistrationParams,
+    RenameOptions, ResourceOperationKind, ServerCapabilities, TextDocumentSyncCapability,
+    TextDocumentSyncKind, TextDocumentSyncOptions, TextDocumentSyncSaveOptions, Url,
 };
 use serde::Deserialize;
 use serde::de::DeserializeOwned;
@@ -40,6 +41,8 @@ use snot_workspace::{Config, Workspace, find_root};
 
 mod completion;
 mod features;
+mod hover;
+mod rename;
 
 type Result<T> = std::result::Result<T, Box<dyn Error + Send + Sync>>;
 
@@ -86,6 +89,15 @@ pub fn run(connection: Connection) -> Result<()> {
         .and_then(|w| w.did_change_watched_files.as_ref())
         .and_then(|w| w.dynamic_registration)
         .unwrap_or(false);
+    let edits = params
+        .capabilities
+        .workspace
+        .as_ref()
+        .and_then(|w| w.workspace_edit.as_ref());
+    let can_rename_files = edits.and_then(|e| e.document_changes).unwrap_or(false)
+        && edits
+            .and_then(|e| e.resource_operations.as_ref())
+            .is_some_and(|ops| ops.contains(&ResourceOperationKind::Rename));
 
     let caps = ServerCapabilities {
         position_encoding: Some(if utf8 {
@@ -115,6 +127,11 @@ pub fn run(connection: Connection) -> Result<()> {
             trigger_characters: Some(["[", "#", "@", ":"].map(String::from).to_vec()),
             ..Default::default()
         }),
+        hover_provider: Some(HoverProviderCapability::Simple(true)),
+        rename_provider: Some(OneOf::Right(RenameOptions {
+            prepare_provider: Some(true),
+            work_done_progress_options: Default::default(),
+        })),
         ..Default::default()
     };
     let result = serde_json::json!({
@@ -153,6 +170,7 @@ pub fn run(connection: Connection) -> Result<()> {
         ws,
         encoding,
         docs: HashMap::new(),
+        can_rename_files,
     };
     for msg in &connection.receiver {
         match msg {
@@ -235,6 +253,8 @@ struct Server {
     ws: Workspace,
     encoding: Encoding,
     docs: HashMap<Url, Doc>,
+    /// The client can rename files in a workspace edit.
+    can_rename_files: bool,
 }
 
 impl Server {
@@ -249,6 +269,9 @@ impl Server {
             DocumentSymbolRequest::METHOD => self.call(req, Self::document_symbols),
             WorkspaceSymbolRequest::METHOD => self.call(req, Self::workspace_symbols),
             Completion::METHOD => self.call(req, Self::completion),
+            HoverRequest::METHOD => self.call(req, Self::hover),
+            PrepareRenameRequest::METHOD => self.try_call(req, Self::prepare_rename),
+            Rename::METHOD => self.try_call(req, Self::rename),
             "snot/backlinks" => self.call(req, Self::backlinks),
             "snot/tags" => self.call(req, |s, (): ()| s.tags()),
             _ => {
@@ -258,7 +281,7 @@ impl Server {
         };
         match result {
             Ok(value) => Response::new_ok(id, value),
-            Err(e) => Response::new_err(id, ErrorCode::InvalidParams as i32, e),
+            Err((code, e)) => Response::new_err(id, code as i32, e),
         }
     }
 
@@ -266,10 +289,21 @@ impl Server {
         &mut self,
         req: Request,
         f: impl FnOnce(&mut Self, P) -> R,
-    ) -> std::result::Result<serde_json::Value, String> {
+    ) -> std::result::Result<serde_json::Value, (ErrorCode, String)> {
+        self.try_call(req, |s, p| Ok(f(s, p)))
+    }
+
+    /// Like `call`, for a handler that can fail with a message for the user.
+    fn try_call<P: DeserializeOwned, R: serde::Serialize>(
+        &mut self,
+        req: Request,
+        f: impl FnOnce(&mut Self, P) -> std::result::Result<R, String>,
+    ) -> std::result::Result<serde_json::Value, (ErrorCode, String)> {
         // `null` params stand for none, as for `snot/tags`.
-        let params = serde_json::from_value(req.params).map_err(|e| e.to_string())?;
-        serde_json::to_value(f(self, params)).map_err(|e| e.to_string())
+        let params = serde_json::from_value(req.params)
+            .map_err(|e| (ErrorCode::InvalidParams, e.to_string()))?;
+        let result = f(self, params).map_err(|e| (ErrorCode::RequestFailed, e))?;
+        serde_json::to_value(result).map_err(|e| (ErrorCode::InternalError, e.to_string()))
     }
 
     fn notification(&mut self, n: Notification) -> Result<()> {

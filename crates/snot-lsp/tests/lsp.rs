@@ -76,16 +76,23 @@ impl Client {
     /// Send a request and wait for its result, keeping what the server sends
     /// meanwhile.
     fn request(&mut self, method: &str, params: Value) -> Value {
+        match self.try_request(method, params) {
+            Ok(result) => result,
+            Err(e) => panic!("{method}: {e}"),
+        }
+    }
+
+    /// Send a request and wait for its result or error message.
+    fn try_request(&mut self, method: &str, params: Value) -> Result<Value, String> {
         self.next_id += 1;
         let id = RequestId::from(self.next_id);
         let req = Request::new(id.clone(), method.to_owned(), params);
         self.conn.sender.send(req.into()).unwrap();
         loop {
             match self.conn.receiver.recv().unwrap() {
-                Message::Response(r) if r.id == id => match r.response_result {
-                    Ok(result) => return result,
-                    Err(e) => panic!("{method}: {e:?}"),
-                },
+                Message::Response(r) if r.id == id => {
+                    return r.response_result.map_err(|e| e.message);
+                }
                 Message::Response(_) => {}
                 Message::Notification(n) => {
                     if n.method == "textDocument/publishDiagnostics" {
@@ -562,6 +569,221 @@ fn completes_links_keys_and_values() {
     // Nothing in code, or for `@id`.
     assert!(complete(&mut c, 4, 4).is_empty());
     assert!(complete(&mut c, 5, 4).is_empty());
+}
+
+#[test]
+fn hovers_on_links() {
+    let mut c = linked();
+    let a = c.open("a.snot", None);
+    let hover = |c: &mut Client, uri: &str, line, character| {
+        let h = c.position("textDocument/hover", uri, line, character);
+        if h.is_null() {
+            return None;
+        }
+        assert_eq!(h["contents"]["kind"], "markdown");
+        Some(h["contents"]["value"].as_str().unwrap().to_owned())
+    };
+    // An anchored heading, with its metadata.
+    assert_eq!(
+        hover(&mut c, &a, 1, 2).as_deref(),
+        Some("**Two** · `b`\n\n`@due:2027`")
+    );
+    let h = c.position("textDocument/hover", &a, 1, 2);
+    assert_eq!(
+        h["range"],
+        json!({ "start": { "line": 1, "character": 0 }, "end": { "line": 1, "character": 9 } })
+    );
+    // An anchor in this file.
+    assert_eq!(
+        hover(&mut c, &a, 1, 12).as_deref(),
+        Some("**Own**\n\n`@id:own`")
+    );
+    // A note as a whole: its first heading.
+    assert_eq!(hover(&mut c, &a, 1, 35).as_deref(), Some("**One** · `b`"));
+    // Nothing on a file link, or off a link.
+    assert_eq!(hover(&mut c, &a, 1, 22), None);
+    assert_eq!(hover(&mut c, &a, 0, 3), None);
+
+    // An anchored item shows its line.
+    let sub = c.open("sub/c.snot", None);
+    assert_eq!(
+        hover(&mut c, &sub, 0, 8).as_deref(),
+        Some("`- item @id:it` · `b`\n\n`@id:it`")
+    );
+}
+
+/// A client that can rename files, over notes linking to each other.
+fn renaming() -> Client {
+    Client::start_with(
+        &[
+            ("a.snot", "# A @id:top\n[[#top]] [[b]] [[b#sec]]\n"),
+            ("b.snot", "# B\n## Sec @id:sec\n[[b#sec]] [[a#top]]\n"),
+        ],
+        json!({
+            "general": { "positionEncodings": ["utf-8"] },
+            "workspace": {
+                "workspaceEdit": { "documentChanges": true, "resourceOperations": ["rename"] },
+            },
+        }),
+    )
+}
+
+/// A workspace edit's operations: `(file, version, [(line, start, end, text)])`
+/// for edits, `("rename", old, new)` for renames.
+fn operations(c: &Client, edit: &Value) -> Vec<Value> {
+    let root = format!("{}/", url(c.root()));
+    let rel = |v: &Value| v.as_str().unwrap().strip_prefix(&root).unwrap().to_owned();
+    edit["documentChanges"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|op| {
+            if op["kind"] == "rename" {
+                return json!(["rename", rel(&op["oldUri"]), rel(&op["newUri"])]);
+            }
+            let edits: Vec<Value> = op["edits"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .map(|e| {
+                    let r = &e["range"];
+                    assert_eq!(r["start"]["line"], r["end"]["line"]);
+                    json!([
+                        r["start"]["line"],
+                        r["start"]["character"],
+                        r["end"]["character"],
+                        e["newText"]
+                    ])
+                })
+                .collect();
+            json!([
+                rel(&op["textDocument"]["uri"]),
+                op["textDocument"]["version"],
+                edits
+            ])
+        })
+        .collect()
+}
+
+fn rename(
+    c: &mut Client,
+    uri: &str,
+    line: u32,
+    character: u32,
+    name: &str,
+) -> Result<Value, String> {
+    c.try_request(
+        "textDocument/rename",
+        json!({
+            "textDocument": { "uri": uri },
+            "position": { "line": line, "character": character },
+            "newName": name,
+        }),
+    )
+}
+
+#[test]
+fn renames_notes() {
+    let mut c = renaming();
+    let a = c.open("a.snot", None);
+    let prepared = c.position("textDocument/prepareRename", &a, 1, 11);
+    assert_eq!(
+        prepared,
+        json!({
+            "range": { "start": { "line": 1, "character": 11 }, "end": { "line": 1, "character": 12 } },
+            "placeholder": "b",
+        })
+    );
+    // Every link to the note, then the file itself; the note's own links too.
+    let edit = rename(&mut c, &a, 1, 11, "notes/bee.snot").unwrap();
+    assert_eq!(
+        operations(&c, &edit),
+        [
+            json!([
+                "a.snot",
+                1,
+                [[1, 11, 12, "notes/bee"], [1, 17, 18, "notes/bee"]]
+            ]),
+            json!(["b.snot", null, [[2, 2, 3, "notes/bee"]]]),
+            json!(["rename", "b.snot", "notes/bee.snot"]),
+        ]
+    );
+    // Off a link, the note the cursor is in.
+    let edit = rename(&mut c, &a, 0, 1, "z").unwrap();
+    assert_eq!(
+        operations(&c, &edit),
+        [
+            json!(["b.snot", null, [[2, 12, 13, "z"]]]),
+            json!(["rename", "a.snot", "z.snot"]),
+        ]
+    );
+
+    for (name, error) in [
+        ("a", "`a` already exists"),
+        (
+            "x.png",
+            "can't rename to `x.png`: links would read a name with an extension as a file",
+        ),
+        ("../x", "can't rename to `../x`: empty path segment or `..`"),
+    ] {
+        assert_eq!(rename(&mut c, &a, 1, 11, name), Err(error.to_owned()));
+    }
+
+    // Not when the editor can't rename files.
+    let mut c = linked();
+    let a = c.open("a.snot", None);
+    assert_eq!(
+        rename(&mut c, &a, 1, 35, "x"),
+        Err("the editor can't rename files through the language server".to_owned())
+    );
+}
+
+#[test]
+fn renames_ids() {
+    let mut c = renaming();
+    let a = c.open("a.snot", None);
+    // From a link's anchor, or the token itself: the token and every link
+    // anchored on it, here and in other notes.
+    let expected = [
+        json!(["a.snot", 1, [[0, 8, 11, "head"], [1, 3, 6, "head"]]]),
+        json!(["b.snot", null, [[2, 14, 17, "head"]]]),
+    ];
+    for (line, character) in [(1, 4), (0, 9)] {
+        let prepared = c.position("textDocument/prepareRename", &a, line, character);
+        assert_eq!(prepared["placeholder"], "top");
+        let edit = rename(&mut c, &a, line, character, "head").unwrap();
+        assert_eq!(operations(&c, &edit), expected);
+    }
+    // An anchor in another note.
+    let edit = rename(&mut c, &a, 1, 20, "part").unwrap();
+    assert_eq!(
+        operations(&c, &edit),
+        [
+            json!(["a.snot", 1, [[1, 19, 22, "part"]]]),
+            json!(["b.snot", null, [[1, 11, 14, "part"], [2, 4, 7, "part"]]]),
+        ]
+    );
+
+    assert_eq!(
+        rename(&mut c, &a, 1, 4, "1x"),
+        Err(
+            "can't rename to `1x`: an `@id` is a letter, then letters, digits, `-` or `_`"
+                .to_owned()
+        )
+    );
+    let b = c.open(
+        "b.snot",
+        Some("# B\n## Sec @id:sec\n[[b#sec]] [[a#top]] [[#b]]\n"),
+    );
+    assert_eq!(
+        rename(&mut c, &b, 2, 23, "x"),
+        Err("`#b` isn't an `@id`; edit the heading to change its anchor".to_owned())
+    );
+    c.change(&a, 2, "# A @id:top\n## Two @id:two\n");
+    assert_eq!(
+        rename(&mut c, &a, 0, 9, "two"),
+        Err("`@id:two` is already used in this note".to_owned())
+    );
 }
 
 #[test]

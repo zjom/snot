@@ -495,3 +495,11 @@ pub(crate) fn heading_title(src: &str, doc: &Document, scope: ScopeId) -> String
         title
     }
 }
+
+/// The first heading in a document.
+pub(crate) fn first_heading(d: &Document) -> Option<ScopeId> {
+    d.scopes
+        .iter()
+        .position(|s| matches!(s.kind, ScopeKind::Heading { .. }))
+        .map(ScopeId)
+}

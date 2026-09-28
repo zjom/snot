@@ -13,7 +13,7 @@ use snot_syntax::{Document, InlineKind, LineKind, ScopeId, ScopeKind, TokenForm}
 use snot_workspace::TokenRef;
 
 use crate::Server;
-use crate::features::{contains, heading_title};
+use crate::features::{contains, first_heading, heading_title};
 
 /// What the text before the cursor is in the middle of.
 #[derive(Debug, PartialEq, Eq)]
@@ -209,14 +209,6 @@ fn context(prefix: &str) -> Option<(Context<'_>, usize)> {
     let partial = &items[item..];
     let leading = partial.len() - partial.trim_start().len();
     Some((Context::Value(key), value_at + 1 + item + leading))
-}
-
-/// The first heading in a document.
-fn first_heading(d: &Document) -> Option<ScopeId> {
-    d.scopes
-        .iter()
-        .position(|s| matches!(s.kind, ScopeKind::Heading { .. }))
-        .map(ScopeId)
 }
 
 /// The anchors a link into `d` can use, in the order they resolve
