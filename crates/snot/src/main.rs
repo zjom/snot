@@ -1,4 +1,4 @@
-//! `snot`: format, check and serve Simple Note Format notes (see PLAN.md).
+//! `snot`: format, check and serve Simple Note Format notes.
 
 use std::path::{Path, PathBuf};
 use std::process::ExitCode;

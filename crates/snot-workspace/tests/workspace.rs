@@ -149,7 +149,7 @@ fn reports_unreadable_notes() {
     assert!(errors[0].to_string().contains("b.snot"));
 }
 
-/// PLAN.md M3: 10k notes index in under a second. Timed only in release
+/// 10k notes index in under a second. Timed only in release
 /// builds, as `nix build` tests.
 #[test]
 fn indexes_ten_thousand_notes_quickly() {
