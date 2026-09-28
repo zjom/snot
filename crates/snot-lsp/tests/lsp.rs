@@ -494,6 +494,77 @@ fn answers_backlinks_and_tags() {
 }
 
 #[test]
+fn completes_links_keys_and_values() {
+    let mut c = linked();
+    let d = c.open(
+        "d.snot",
+        Some("see [[su\n[[b#t\nx @u\n@due:2\n`@du`\n@id:\n"),
+    );
+    let complete = |c: &mut Client, line, character| {
+        let r = c.request(
+            "textDocument/completion",
+            json!({
+                "textDocument": { "uri": d },
+                "position": { "line": line, "character": character },
+                "context": { "triggerKind": 1 },
+            }),
+        );
+        if r.is_null() {
+            return vec![];
+        }
+        r.as_array()
+            .unwrap()
+            .iter()
+            .map(|i| {
+                let label = i["label"].as_str().unwrap().to_owned();
+                let detail = i["detail"].as_str().map(str::to_owned);
+                let r = &i["textEdit"]["range"];
+                assert_eq!(i["textEdit"]["newText"], label.as_str());
+                assert_eq!(r["start"]["line"], line);
+                assert_eq!(r["end"]["character"], character);
+                (label, detail, r["start"]["character"].as_u64().unwrap())
+            })
+            .collect()
+    };
+    let item = |label: &str, detail: Option<&str>, start| {
+        (label.to_owned(), detail.map(str::to_owned), start)
+    };
+
+    // Note paths, replacing what follows `[[`, with each note's first heading.
+    assert_eq!(
+        complete(&mut c, 0, 8),
+        [
+            item("a", Some("Own"), 6),
+            item("b", Some("One"), 6),
+            item("d", None, 6),
+            item("sub/c", None, 6)
+        ]
+    );
+    // Anchors: `@id`s first, as they resolve first.
+    assert_eq!(
+        complete(&mut c, 1, 5),
+        [
+            item("it", Some("item"), 4),
+            item("one", Some("One"), 4),
+            item("two", Some("Two"), 4)
+        ]
+    );
+    // Keys, but not the half-typed `@u` itself.
+    let labels = |items: Vec<(String, Option<String>, u64)>| {
+        items.into_iter().map(|(l, _, _)| l).collect::<Vec<_>>()
+    };
+    assert_eq!(labels(complete(&mut c, 2, 4)), ["due", "id", "urgent"]);
+    // Values given to the key elsewhere.
+    assert_eq!(
+        complete(&mut c, 3, 6),
+        [item("2026", None, 5), item("2027", None, 5)]
+    );
+    // Nothing in code, or for `@id`.
+    assert!(complete(&mut c, 4, 4).is_empty());
+    assert!(complete(&mut c, 5, 4).is_empty());
+}
+
+#[test]
 fn counts_columns_in_utf16_unless_offered_utf8() {
     let mut c = Client::start_with(&[("b.snot", "")], json!({}));
     let a = c.open("a.snot", Some("é𝄞 [[b]] [[nope]]\n"));

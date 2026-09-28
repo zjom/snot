@@ -471,12 +471,12 @@ impl<'a> Locator<'a> {
 
 /// `offset` is in `span`, or just after it (where a cursor ends up after
 /// typing the span).
-fn contains(span: &Span, offset: usize) -> bool {
+pub(crate) fn contains(span: &Span, offset: usize) -> bool {
     span.start <= offset && offset <= span.end
 }
 
 /// A heading's text without its tokens, with runs of whitespace collapsed.
-fn heading_title(src: &str, doc: &Document, scope: ScopeId) -> String {
+pub(crate) fn heading_title(src: &str, doc: &Document, scope: ScopeId) -> String {
     let s = doc.scope(scope);
     let ScopeKind::Heading { text, level, .. } = &s.kind else {
         return String::new();

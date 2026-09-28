@@ -23,20 +23,22 @@ use lsp_types::notification::{
     DidSaveTextDocument, Notification as _, PublishDiagnostics,
 };
 use lsp_types::request::{
-    DocumentLinkRequest, DocumentSymbolRequest, Formatting, GotoDefinition, RangeFormatting,
-    References, RegisterCapability, Request as _, WorkspaceSymbolRequest,
+    Completion, DocumentLinkRequest, DocumentSymbolRequest, Formatting, GotoDefinition,
+    RangeFormatting, References, RegisterCapability, Request as _, WorkspaceSymbolRequest,
 };
 use lsp_types::{
-    DidChangeWatchedFilesRegistrationOptions, DocumentLinkOptions, FileSystemWatcher, GlobPattern,
-    InitializeParams, NumberOrString, OneOf, PositionEncodingKind, PublishDiagnosticsParams,
-    Registration, RegistrationParams, ServerCapabilities, TextDocumentSyncCapability,
-    TextDocumentSyncKind, TextDocumentSyncOptions, TextDocumentSyncSaveOptions, Url,
+    CompletionOptions, DidChangeWatchedFilesRegistrationOptions, DocumentLinkOptions,
+    FileSystemWatcher, GlobPattern, InitializeParams, NumberOrString, OneOf, PositionEncodingKind,
+    PublishDiagnosticsParams, Registration, RegistrationParams, ServerCapabilities,
+    TextDocumentSyncCapability, TextDocumentSyncKind, TextDocumentSyncOptions,
+    TextDocumentSyncSaveOptions, Url,
 };
 use serde::Deserialize;
 use serde::de::DeserializeOwned;
 use snot_syntax::{Document, Encoding, LineIndex, Severity, Span, parse};
 use snot_workspace::{Config, Workspace, find_root};
 
+mod completion;
 mod features;
 
 type Result<T> = std::result::Result<T, Box<dyn Error + Send + Sync>>;
@@ -108,6 +110,10 @@ pub fn run(connection: Connection) -> Result<()> {
         document_link_provider: Some(DocumentLinkOptions {
             resolve_provider: Some(false),
             work_done_progress_options: Default::default(),
+        }),
+        completion_provider: Some(CompletionOptions {
+            trigger_characters: Some(["[", "#", "@", ":"].map(String::from).to_vec()),
+            ..Default::default()
         }),
         ..Default::default()
     };
@@ -242,6 +248,7 @@ impl Server {
             DocumentLinkRequest::METHOD => self.call(req, Self::document_links),
             DocumentSymbolRequest::METHOD => self.call(req, Self::document_symbols),
             WorkspaceSymbolRequest::METHOD => self.call(req, Self::workspace_symbols),
+            Completion::METHOD => self.call(req, Self::completion),
             "snot/backlinks" => self.call(req, Self::backlinks),
             "snot/tags" => self.call(req, |s, (): ()| s.tags()),
             _ => {
