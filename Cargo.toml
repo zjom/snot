@@ -10,11 +10,11 @@ repository = "https://github.com/zjom/snot"
 license = "MIT"
 
 [workspace.dependencies]
-snot-syntax = { path = "crates/snot-syntax" }
-snot-fmt = { path = "crates/snot-fmt" }
-snot-workspace = { path = "crates/snot-workspace" }
-snot-check = { path = "crates/snot-check" }
-snot-lsp = { path = "crates/snot-lsp" }
+snot-syntax = { path = "crates/snot-syntax", version = "0.1.0" }
+snot-fmt = { path = "crates/snot-fmt", version = "0.1.0" }
+snot-workspace = { path = "crates/snot-workspace", version = "0.1.0" }
+snot-check = { path = "crates/snot-check", version = "0.1.0" }
+snot-lsp = { path = "crates/snot-lsp", version = "0.1.0" }
 
 [workspace.lints.rust]
 unsafe_code = "forbid"
