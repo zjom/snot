@@ -9,6 +9,10 @@ license.workspace = true
 
 [dependencies]
 snot-syntax.workspace = true
+unicode-width = "0.2"
 
 [lints]
 workspace = true
+
+[dev-dependencies]
+proptest = "1"

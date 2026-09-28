@@ -9,6 +9,7 @@
 mod diagnostic;
 mod document;
 mod inline;
+mod line_index;
 mod lines;
 mod link;
 mod slug;
@@ -16,6 +17,7 @@ mod structure;
 
 pub use diagnostic::{Code, Diagnostic, Severity};
 pub use document::*;
+pub use line_index::{Encoding, LineIndex, Position};
 pub use slug::slug;
 
 /// Parse a note.
