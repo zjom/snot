@@ -270,7 +270,7 @@ fn parts(src: &str, link: &Link) -> (Span, Option<Span>) {
 
 /// Why `name` can't name a note, if it can't (NOTE_SPEC 7.2). Names needing
 /// escapes in a link are refused too.
-fn name_problem(name: &str) -> Option<&'static str> {
+pub(crate) fn name_problem(name: &str) -> Option<&'static str> {
     let last = name.rsplit('/').next().unwrap_or(name);
     if name.is_empty() {
         Some("the name is empty")

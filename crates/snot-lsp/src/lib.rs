@@ -23,22 +23,24 @@ use lsp_types::notification::{
     DidSaveTextDocument, Notification as _, PublishDiagnostics,
 };
 use lsp_types::request::{
-    Completion, DocumentLinkRequest, DocumentSymbolRequest, Formatting, GotoDefinition,
-    HoverRequest, PrepareRenameRequest, RangeFormatting, References, RegisterCapability, Rename,
-    Request as _, WorkspaceSymbolRequest,
+    CodeActionRequest, Completion, DocumentLinkRequest, DocumentSymbolRequest, Formatting,
+    GotoDefinition, HoverRequest, PrepareRenameRequest, RangeFormatting, References,
+    RegisterCapability, Rename, Request as _, WorkspaceSymbolRequest,
 };
 use lsp_types::{
-    CompletionOptions, DidChangeWatchedFilesRegistrationOptions, DocumentLinkOptions,
-    FileSystemWatcher, GlobPattern, HoverProviderCapability, InitializeParams, NumberOrString,
-    OneOf, PositionEncodingKind, PublishDiagnosticsParams, Registration, RegistrationParams,
-    RenameOptions, ResourceOperationKind, ServerCapabilities, TextDocumentSyncCapability,
-    TextDocumentSyncKind, TextDocumentSyncOptions, TextDocumentSyncSaveOptions, Url,
+    CodeActionKind, CodeActionOptions, CodeActionProviderCapability, CompletionOptions,
+    DidChangeWatchedFilesRegistrationOptions, DocumentLinkOptions, FileSystemWatcher, GlobPattern,
+    HoverProviderCapability, InitializeParams, NumberOrString, OneOf, PositionEncodingKind,
+    PublishDiagnosticsParams, Registration, RegistrationParams, RenameOptions,
+    ResourceOperationKind, ServerCapabilities, TextDocumentSyncCapability, TextDocumentSyncKind,
+    TextDocumentSyncOptions, TextDocumentSyncSaveOptions, Url,
 };
 use serde::Deserialize;
 use serde::de::DeserializeOwned;
 use snot_syntax::{Document, Encoding, LineIndex, Severity, Span, parse};
 use snot_workspace::{Config, Workspace, find_root};
 
+mod code_action;
 mod completion;
 mod features;
 mod hover;
@@ -94,10 +96,14 @@ pub fn run(connection: Connection) -> Result<()> {
         .workspace
         .as_ref()
         .and_then(|w| w.workspace_edit.as_ref());
-    let can_rename_files = edits.and_then(|e| e.document_changes).unwrap_or(false)
-        && edits
-            .and_then(|e| e.resource_operations.as_ref())
-            .is_some_and(|ops| ops.contains(&ResourceOperationKind::Rename));
+    let can = |op| {
+        edits.and_then(|e| e.document_changes).unwrap_or(false)
+            && edits
+                .and_then(|e| e.resource_operations.as_ref())
+                .is_some_and(|ops| ops.contains(&op))
+    };
+    let can_rename_files = can(ResourceOperationKind::Rename);
+    let can_create_files = can(ResourceOperationKind::Create);
 
     let caps = ServerCapabilities {
         position_encoding: Some(if utf8 {
@@ -132,6 +138,12 @@ pub fn run(connection: Connection) -> Result<()> {
             prepare_provider: Some(true),
             work_done_progress_options: Default::default(),
         })),
+        code_action_provider: can_create_files.then(|| {
+            CodeActionProviderCapability::Options(CodeActionOptions {
+                code_action_kinds: Some(vec![CodeActionKind::QUICKFIX]),
+                ..Default::default()
+            })
+        }),
         ..Default::default()
     };
     let result = serde_json::json!({
@@ -171,6 +183,7 @@ pub fn run(connection: Connection) -> Result<()> {
         encoding,
         docs: HashMap::new(),
         can_rename_files,
+        can_create_files,
     };
     for msg in &connection.receiver {
         match msg {
@@ -255,6 +268,8 @@ struct Server {
     docs: HashMap<Url, Doc>,
     /// The client can rename files in a workspace edit.
     can_rename_files: bool,
+    /// The client can create files in a workspace edit.
+    can_create_files: bool,
 }
 
 impl Server {
@@ -272,6 +287,7 @@ impl Server {
             HoverRequest::METHOD => self.call(req, Self::hover),
             PrepareRenameRequest::METHOD => self.try_call(req, Self::prepare_rename),
             Rename::METHOD => self.try_call(req, Self::rename),
+            CodeActionRequest::METHOD => self.call(req, Self::code_actions),
             "snot/backlinks" => self.call(req, Self::backlinks),
             "snot/tags" => self.call(req, |s, (): ()| s.tags()),
             _ => {

@@ -812,3 +812,58 @@ fn watches_notes_when_the_client_can() {
     let c = Client::start(&[]);
     assert_eq!(c.server_requests, Vec::<String>::new());
 }
+
+fn code_actions(c: &mut Client, uri: &str, line: u32, start: u32, end: u32) -> Value {
+    let diagnostics = c.diagnostics.get(uri).cloned().unwrap_or(json!([]));
+    c.request(
+        "textDocument/codeAction",
+        json!({
+            "textDocument": { "uri": uri },
+            "range": {
+                "start": { "line": line, "character": start },
+                "end": { "line": line, "character": end },
+            },
+            "context": { "diagnostics": diagnostics },
+        }),
+    )
+}
+
+#[test]
+fn offers_to_create_missing_notes() {
+    let mut c = Client::start_with(
+        &[("b.snot", "")],
+        json!({
+            "general": { "positionEncodings": ["utf-8"] },
+            "workspace": {
+                "workspaceEdit": { "documentChanges": true, "resourceOperations": ["create"] },
+            },
+        }),
+    );
+    let a = c.open("a.snot", Some("[[b]] [[sub/new#x]] [[sub/new]] [[a]]\n"));
+    assert_eq!(c.codes(&a), ["L003", "L003"]);
+
+    // On a link to a missing note: one action, fixing both its diagnostics.
+    let actions = code_actions(&mut c, &a, 0, 8, 8);
+    let actions = actions.as_array().unwrap();
+    assert_eq!(actions.len(), 1);
+    let action = &actions[0];
+    assert_eq!(action["title"], "Create note `sub/new`");
+    assert_eq!(action["kind"], "quickfix");
+    assert_eq!(action["diagnostics"].as_array().unwrap().len(), 2);
+    assert_eq!(
+        action["edit"]["documentChanges"],
+        json!([{
+            "kind": "create",
+            "uri": c.uri("sub/new.snot"),
+            "options": { "overwrite": false, "ignoreIfExists": true },
+        }])
+    );
+    // Not on links to notes that exist, or to the note itself.
+    assert_eq!(code_actions(&mut c, &a, 0, 1, 1), json!([]));
+    assert_eq!(code_actions(&mut c, &a, 0, 34, 34), json!([]));
+
+    // Not when the editor can't create files.
+    let mut c = Client::start(&[]);
+    let a = c.open("a.snot", Some("[[new]]\n"));
+    assert_eq!(code_actions(&mut c, &a, 0, 2, 2), Value::Null);
+}
